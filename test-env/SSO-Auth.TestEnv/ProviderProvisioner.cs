@@ -60,7 +60,7 @@ public sealed class ProviderProvisioner(EnvConfig config)
         // (e.g., poll /Users/AuthenticateByName itself, or wait on a more specific endpoint)
         // would remove the need for this retry loop. For now, the loop handles the known cold-start
         // race where /System/Info/Public is 200 but /Users/AuthenticateByName is 503 for several seconds.
-        // After a stop/restart (ResetAsync), Jellyfin can take 60+ seconds for the auth endpoint to
+        // On a fresh container start, Jellyfin can take 60+ seconds for the auth endpoint to
         // become available, so 30 attempts at 2s = 60s is the minimum safe budget.
         const int maxAttempts = 30;
         var delay = TimeSpan.FromSeconds(2);
